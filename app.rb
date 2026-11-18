@@ -5,12 +5,12 @@ class App < Sinatra::Base
     register Sinatra::Reloader
 
     def db
-        return @db if @db
+      return @db if @db
 
-        @db = SQLite3::Database.new(DB_PATH)
-        @db.results_as_hash = true
-
-        return @db
+      @db = SQLite3::Database.new(DB_PATH)
+      @db.results_as_hash = true
+      
+      return @db
     end
 
     def todos
@@ -27,7 +27,7 @@ class App < Sinatra::Base
         LEFT JOIN categories
         ON categories.id = todos.category_id
         WHERE todos.id=?
-      ", id)
+      ", id).first
     end
 
     def todos_on_category(cat_id)
@@ -52,11 +52,39 @@ class App < Sinatra::Base
       ", id)
     end
 
+    ###########
+    ## INDEX ##
+    ###########
+    get "/" do        
+      @todos = todos
 
+      erb(:'todos/index')
+    end
 
-    get '/' do        
-        @todos = todos_on_category(2)
-        erb(:'todos/index')
+    ##########
+    ## TODO ##
+    ##########
+    get "/todos/:id" do |id|
+      @todo = todo(id)
+      ap @todo
+      ap @todo["name"]
+      erb(:'todos/show')
+
+    end
+
+    post "/todos/:id/set_completed" do |id|
+      db.execute("UPDATE todos SET completed=1 WHERE id=?", [id])
+      redirect("/")
+    end
+
+    post "/todos/:id/set_not_completed" do |id|
+      db.execute("UPDATE todos SET completed=0 WHERE id=?", [id])
+      redirect("/")
+    end
+    
+    post "/todos/:id/delete" do |id|
+      db.execute("DELETE FROM todos WHERE id=?", [id])
+      redirect("/")
     end
 
 end

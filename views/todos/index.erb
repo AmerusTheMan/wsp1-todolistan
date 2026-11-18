@@ -1,1 +1,49 @@
-<img src="/img/glhf.png">
+<h2>TODO</h2>
+<div class="todo-list" >
+    <% for todo in @todos %>
+        <% if todo["completed"]==0 %>
+            <div class="todo-block">
+                <h3><%= todo["name"] %></h3>
+                <p> <%= todo["description"] %> </p>
+                <div class="actions">
+                    <form action="/todos/<%= todo["id"] %>/delete" method="post"> 
+                    <button type="submit">Ta bort</button> 
+                    </form>
+
+                    <form action="/todos/<%= todo["id"] %>/set_completed" method="post"> 
+                        <button type="submit">Färdig</button> 
+                    </form>
+
+                    <a href="/todos/<%= todo["id"] %>/ändra">Ändra</a>
+                </div>
+                
+            </div>
+        <% end %>
+
+    <%end%>
+</div>
+
+<h2>Färdiga</h2>
+<div class="todo-list">
+    <% for todo in @todos %>
+        <% if todo["completed"]==1 %>
+            <div class="todo-block">
+                <h3><%= todo["name"] %></h3>
+                <p> <%= todo["description"] %> </p>
+                <div class="actions">
+                    <form action="/todos/<%= todo["id"] %>/delete" method="post"> 
+                    <button type="submit">Ta bort</button> 
+                    </form>
+
+                    <form action="/todos/<%= todo["id"] %>/set_not_completed" method="post"> 
+                        <button type="submit">Ofärdig</button> 
+                    </form>
+
+                    <a href="/todos/<%= todo["id"] %>/ändra">Ändra</a>
+                </div>
+                
+            </div>
+        <% end %>
+
+    <%end%>
+</div>

@@ -27,8 +27,8 @@ db.execute('INSERT INTO todos (name, description, completed, category_id) VALUES
 db.execute('INSERT INTO todos (name, description, completed, category_id) VALUES ("Köp julgran", "En rödgran", 0, 2)')
 db.execute('INSERT INTO todos (name, description, completed, category_id) VALUES ("Pynta gran", "Glöm inte lamporna i granen och tomten", 0, 3)')
 
-db.execute('INSERT INTO categories (name, description) VALUES (privat, saker som bara jag ser)')
-db.execute('INSERT INTO categories (name, description) VALUES (inköp, saker som ska köpas in)')
-db.execute('INSERT INTO categories (name, description) VALUES (jul, saker som hör till julen)')
+db.execute('INSERT INTO categories (name, description) VALUES ("privat", "saker som bara jag ser")')
+db.execute('INSERT INTO categories (name, description) VALUES ("inköp", "saker som ska köpas in")')
+db.execute('INSERT INTO categories (name, description) VALUES ("jul", "saker som hör till julen")')
 
 puts "✅ Databasen är seedad!"

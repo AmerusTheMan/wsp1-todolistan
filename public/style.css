@@ -5,3 +5,45 @@ body {
   font-size: x-large;
   margin: 1em;
 }
+
+.wrapper{
+  display: grid;
+  grid-template-areas: 
+  "hd hd"
+  "mn as"
+  ;
+
+  grid-template-columns: 2fr 1fr;
+
+}
+
+header{
+  grid-area: hd;
+}
+
+main{
+  grid-area: mn;
+}
+
+aside{
+  grid-area: as;
+}
+
+
+.todo-list{
+  display: flex;
+  flex-wrap: wrap;
+  
+
+  
+}
+.todo-block{
+  background-color:azure;
+  width: 25%;
+  padding: 1rem;
+  margin: 5px;
+
+  .actions{
+    display: flex;
+  }
+}
