@@ -3,8 +3,10 @@
     <% for todo in @todos %>
         <% if todo["completed"]==0 %>
             <div class="todo-block">
-                <h3><%= todo["name"] %></h3>
+                <a href="/todos/<%= todo["id"] %>"><h3><%= todo["name"] %></h3></a>
                 <p> <%= todo["description"] %> </p>
+                <p> <%= todo["cat_name"]%> </p>
+
                 <div class="actions">
                     <form action="/todos/<%= todo["id"] %>/delete" method="post"> 
                     <button type="submit">Ta bort</button> 
@@ -14,7 +16,7 @@
                         <button type="submit">Färdig</button> 
                     </form>
 
-                    <a href="/todos/<%= todo["id"] %>/ändra">Ändra</a>
+                    <a href="/todos/<%= todo["id"] %>/edit">Ändra</a>
                 </div>
                 
             </div>
@@ -28,8 +30,9 @@
     <% for todo in @todos %>
         <% if todo["completed"]==1 %>
             <div class="todo-block">
-                <h3><%= todo["name"] %></h3>
+                <a href="/todos/<%= todo["id"] %>"><h3><%= todo["name"] %></h3></a>
                 <p> <%= todo["description"] %> </p>
+                <p> <%= todo["cat_name"]%> </p>
                 <div class="actions">
                     <form action="/todos/<%= todo["id"] %>/delete" method="post"> 
                     <button type="submit">Ta bort</button> 
@@ -39,7 +42,7 @@
                         <button type="submit">Ofärdig</button> 
                     </form>
 
-                    <a href="/todos/<%= todo["id"] %>/ändra">Ändra</a>
+                    <a href="/todos/<%= todo["id"] %>/edit">Ändra</a>
                 </div>
                 
             </div>

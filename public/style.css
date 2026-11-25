@@ -10,6 +10,7 @@ body {
   display: grid;
   grid-template-areas: 
   "hd hd"
+  "nv nv"
   "mn as"
   ;
 
@@ -29,6 +30,10 @@ aside{
   grid-area: as;
 }
 
+nav{
+  grid-area: nv;
+}
+
 
 .todo-list{
   display: flex;
@@ -42,6 +47,7 @@ aside{
   width: 25%;
   padding: 1rem;
   margin: 5px;
+  overflow-wrap: break-word;
 
   .actions{
     display: flex;

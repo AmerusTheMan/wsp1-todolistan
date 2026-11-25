@@ -52,6 +52,12 @@ class App < Sinatra::Base
       ", id)
     end
 
+
+    before do
+      @categories = categories
+    end
+
+
     ###########
     ## INDEX ##
     ###########
@@ -66,10 +72,24 @@ class App < Sinatra::Base
     ##########
     get "/todos/:id" do |id|
       @todo = todo(id)
-      ap @todo
-      ap @todo["name"]
       erb(:'todos/show')
 
+    end
+
+    get "/todos/:id/edit" do |id|
+      @todo = todo(id)
+      erb(:'todos/edit')
+    end
+
+    post "/todos" do
+      name = params["name"]
+      description = params["description"]
+      cat_id = params["category"]
+
+      db.execute("INSERT INTO todos (name, description, category_id, completed) 
+                  VALUES (?, ?, ?, ?)", [name, description, cat_id, 0])
+
+      redirect("/")
     end
 
     post "/todos/:id/set_completed" do |id|
@@ -84,6 +104,15 @@ class App < Sinatra::Base
     
     post "/todos/:id/delete" do |id|
       db.execute("DELETE FROM todos WHERE id=?", [id])
+      redirect("/")
+    end
+
+    post "/todos/:id/update" do |id|
+      name = params["name"]
+      description = params["description"]
+      cat_id = params["category"]
+
+      db.execute("UPDATE todos SET name=?, description=?, category_id=? WHERE id=?", [name, description, cat_id, id])
       redirect("/")
     end
 

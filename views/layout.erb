@@ -9,16 +9,33 @@
 <body>
   <div class="wrapper">
     <header>
-
+      <h1>Todo-sidan</h1>
     </header>
     <nav>
-        
+        <a href="/">Hem</a>
     </nav>
     <main>
       <%= yield %>
     </main>
     <Aside>
+      <form action="/todos" method="post">
+        <h2>Skapa todo</h2>
+        <label for="name"><h3>Namn</h3></label>
+        <input type="text" name="name" required>
 
+        <label for="description"><h3>Beskrivning</h3></label>
+        <input type="text" name="description" required>
+
+        <label for="category"><h3>Kategori</h3></label>
+        <select name="category" required>
+          <% @categories.each do |cat| %>
+            <option value="<%= cat["id"] %>"><%= cat["name"] %></option>
+          <% end%>
+        </select>
+
+        <br>
+        <input type="submit" value="Skapa">
+      </form>
     </Aside>
   </div>
   
